@@ -30,6 +30,14 @@ func (ub *UserBussines) AddUser(newUser domain.User) (domain.User, error) {
 }
 
 // ShowAllUser implements domain.UserService
-func (*UserBussines) ShowAllUser() ([]domain.User, error) {
-	panic("unimplemented")
+func (ub *UserBussines) ShowAllUser() ([]domain.User, error) {
+	res, err := ub.mdl.GetAll()
+	var customErorr error
+	if err != nil {
+		if strings.Contains(err.Error(), "database getall vendor") {
+			customErorr = errors.New("cant getAll from database")
+		}
+		return nil, customErorr
+	}
+	return res, nil
 }

@@ -1,9 +1,11 @@
 package main
 
 import (
+	"clean_architecture/config"
 	"clean_architecture/feature/user/data"
 	"clean_architecture/feature/user/delivery"
 	"clean_architecture/feature/user/services"
+	"clean_architecture/utils/database"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -11,8 +13,10 @@ import (
 )
 
 func main() {
+	//pemanggialn echo
 	e := echo.New()
 
+	//pemanggilan config
 	cfg := config.NewConfig()
 	db := database.InitDB(cfg)
 
